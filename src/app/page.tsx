@@ -1,5 +1,6 @@
 import ukulele from '@tombatossals/chords-db/src/db/ukulele/';
 import progressions from '@/data/progressions.json';
+import strumming from '@/data/strumming.json';
 
 export const dynamic = 'force-dynamic'
 
@@ -37,6 +38,8 @@ export default async function Home() {
   const scales = [cMajorScale, gMajorScale, fMajorScale];
   const scale = scales[Math.floor(Math.random() * scales.length)]
 
+  const pattern = strumming[Math.floor(Math.random() * strumming.length)]
+
   return (
       <div>
         <h3 className='text-2xl text-center mb-8'>{progression.name}</h3>
@@ -56,6 +59,13 @@ export default async function Home() {
               </div>
             )
           })}
+        </div>
+
+        <div>
+          <h3 className='text-2xl text-center mt-8 mb-4'>Strumming Pattern</h3>
+          <div className='text-center'>
+            <p>{pattern.pattern.join(' ')}</p>
+          </div>
         </div>
       </div>
   );

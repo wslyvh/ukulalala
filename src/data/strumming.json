@@ -1,0 +1,9 @@
+[
+    {"name": "Down", "pattern": ["D", "D", "D", "D"]},
+    {"name": "Down #2", "pattern": ["D", "DU", "D", "DU"]},
+    {"name": "Down #3", "pattern": ["D", "D", "DU", "D"]},
+    {"name": "Down #4", "pattern": ["D", "D", "D", "DU"]},
+    {"name": "Down/Up", "pattern": ["DU", "DU", "DU", "DU"]},
+    {"name": "Simple", "pattern": ["D", "DU", "U", "D"]}
+    {"name": "Island", "pattern": ["D", "DU", "U", "DU"]}
+]
