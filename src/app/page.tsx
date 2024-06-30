@@ -1,6 +1,8 @@
 import ukulele from '@tombatossals/chords-db/src/db/ukulele/';
 import { promises as fs } from 'fs';
 
+export const dynamic = 'force-dynamic'
+
 export default async function Home() {
   const progressionsData = await fs.readFile(process.cwd() + '/src/data/progressions.json', 'utf8')
   const progressions = JSON.parse(progressionsData)
