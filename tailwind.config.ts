@@ -1,10 +1,11 @@
-import type { Config } from "tailwindcss";
+import type { Config } from "tailwindcss"
 
 const config: Config = {
   content: [
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  theme: {},
-  plugins: [],
-};
-export default config;
+  plugins: [require("@tailwindcss/typography"), require("daisyui")],
+  daisyui: { themes: ['retro'] },
+}
+
+export default config
