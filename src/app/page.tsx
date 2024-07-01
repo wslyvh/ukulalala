@@ -9,15 +9,15 @@ export const revalidate = 0
 export default async function Home() {
   const progression = progressions[Math.floor(Math.random() * progressions.length)]
 
-  const aMajorScale = [
-    ukulele.chords.A.find((i: any) => i.suffix === 'major'),
-    ukulele.chords.B.find((i: any) => i.suffix === 'minor'),
-    ukulele.chords.C.find((i: any) => i.suffix === 'minor'),
-    ukulele.chords.D.find((i: any) => i.suffix === 'major'),
-    ukulele.chords.E.find((i: any) => i.suffix === 'major'),
-    ukulele.chords.F.find((i: any) => i.suffix === 'minor'),
-    ukulele.chords.G.find((i: any) => i.suffix === 'dim')
-  ]
+  // const aMajorScale = [
+  //   ukulele.chords.A.find((i: any) => i.suffix === 'major'),
+  //   ukulele.chords.B.find((i: any) => i.suffix === 'minor'),
+  //   ukulele.chords.C.find((i: any) => i.suffix === 'minor'),
+  //   ukulele.chords.D.find((i: any) => i.suffix === 'major'),
+  //   ukulele.chords.E.find((i: any) => i.suffix === 'major'),
+  //   ukulele.chords.F.find((i: any) => i.suffix === 'minor'),
+  //   ukulele.chords.G.find((i: any) => i.suffix === 'dim')
+  // ]
 
   // const bMajorScale = [
   //   ukulele.chords.B.find((i: any) => i.suffix === 'major'),
@@ -79,7 +79,7 @@ export default async function Home() {
     ukulele.chords.F.find((i: any) => i.suffix === 'dim')
   ]
 
-  const scales = [aMajorScale, cMajorScale, dMajorScale, fMajorScale, gMajorScale]
+  const scales = [cMajorScale, dMajorScale, fMajorScale, gMajorScale]
   const scale = scales[Math.floor(Math.random() * scales.length)]
 
   const pattern = strumming[Math.floor(Math.random() * strumming.length)]
@@ -114,7 +114,7 @@ export default async function Home() {
         </div>
 
         <div className='flex justify-center mt-8'>
-          <RefreshButton />
+          <RefreshButton text='New Exercise' />
         </div>
       </div>
   );
