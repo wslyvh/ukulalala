@@ -1,7 +1,7 @@
 import ukulele from '@tombatossals/chords-db/src/db/ukulele/';
 import progressions from '@/data/progressions.json';
 import strumming from '@/data/strumming.json';
-import RefreshButton from '@/components/refresh';
+import warmup from '@/data/warmup.json';
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -84,8 +84,34 @@ export default async function Home() {
 
   const pattern = strumming[Math.floor(Math.random() * strumming.length)]
 
+  const warmup1 = warmup.filter((i: any) => i.type === 1)[Math.floor(Math.random() * 2)]
+  const warmup2 = warmup.filter((i: any) => i.type === 2)[Math.floor(Math.random() * 2)]
+  const warmup3 = warmup.filter((i: any) => i.type === 3)[Math.floor(Math.random() * 2)]
+
   return (
       <div>
+        <div tabIndex={0} className="collapse collapse-plus border-base-300 bg-base-200 border mb-8">
+          <input type="checkbox" />
+          <div className="collapse-title text-xl font-medium m-0 pb-0">Warmup</div>
+          <div className="collapse-content">
+            <ul className='list-disc list-inside'>
+              <li>
+                <b>{warmup1.name}</b> ({warmup1.reps} reps) <br />
+                <p className='py-2'>{warmup1.exercise}</p>
+              </li>
+            </ul>
+
+            <hr className="h-px my-4 bg-base-300 border-0" />
+
+            <ul className='list-disc list-inside'>
+              <li>
+                <b>{warmup2.name}</b> ({warmup2.reps} reps) <br />
+                <p className='whitespace-pre-line leading-loose py-2'>{warmup2.exercise}</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+
         <h3 className='text-2xl text-center mb-2'>{progression.name}</h3>
         <p className='text-xs text-center mb-8'>{progression.progression.join(' ')}</p>
 

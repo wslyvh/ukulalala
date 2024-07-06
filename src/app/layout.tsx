@@ -56,7 +56,7 @@ export default function RootLayout(props: PropsWithChildren) {
         <link rel='apple-touch-icon' href='/icons/apple-touch-icon.png' type='image/png' sizes='any' />
       </head>
       <body>
-        <main className="flex min-h-screen flex-col items-center justify-between p-4 sm:p-8">
+        <main className="container mx-auto flex min-h-screen flex-col items-center justify-between p-4 sm:p-8">
           <header className='flex flex-col text-center justify-center'>
             <h1 className="text-4xl">{SITE_EMOJI} {SITE_NAME}</h1>
             <h2 className="text-sm mt-2">{SITE_DESCRIPTION}</h2>
