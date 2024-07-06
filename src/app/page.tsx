@@ -3,6 +3,7 @@ import progressions from '@/data/progressions.json';
 import strumming from '@/data/strumming.json';
 import warmup from '@/data/warmup.json';
 import LikeButtons from '@/components/like';
+import { MajorScales } from '@/components/scales';
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -113,6 +114,26 @@ export default async function Home() {
           </div>
         </div>
 
+        <div tabIndex={1} className="collapse collapse-plus border-base-300 bg-base-200 border mb-8">
+          <input type="checkbox" />
+          <div className="collapse-title text-xl font-medium m-0 pb-0">Scale Practice</div>
+          <div className="collapse-content">
+            <strong>{scale[0].key} Major scale</strong>
+            <p className='whitespace-pre-line leading-loose text-center text-sm md:text-base'>
+              <MajorScales scale={scale[0].key} />
+            </p>
+
+            <hr className="h-px my-4 bg-base-300 border-0" />
+
+            <strong>Practice tips</strong>
+            <ul className='list-disc list-inside'>
+              <li>Begin by playing the scale slowly</li>
+              <li>Use a metronome to gradually increase speed</li>
+              <li>Use appropriate finger positioning for each note</li>
+            </ul>
+          </div>
+        </div>
+
         <h3 className='text-2xl text-center mb-2'>{progression.name}</h3>
         <p className='text-xs text-center mb-8'>{progression.progression.join(' ')}</p>
 
@@ -125,8 +146,8 @@ export default async function Home() {
                   key={index}
                   frets={chord.positions[0].frets}
                   fingers={chord.positions[0].fingers}
-                  position={chord.positions[0].position}
                   name={`${chord.key} ${chord.suffix}`}
+                  length={5}
                   size={1.5} />
               </div>
             )
