@@ -1,0 +1,6 @@
+[
+    {"name": "Finger Spread", "type": 1, "reps": 10, "exercise": "Place your hand on a flat surface, and gently spread your fingers apart as wide as you can. Hold for a few seconds and then relax." },
+    {"name": "Finger Flex", "type": 1, "reps": 10, "exercise": "Stretch your fingers out straight and then curl them into a fist. Hold for a few seconds, then release and stretch them out again." },
+    {"name": "Finger Rolls", "type": 2, "reps": 5, "exercise": "Place your fingers on the A string (bottom string) on frets 1, 2, 3, and 4 using your index, middle, ring, and pinky fingers respectively. \nPlay each note in sequence and then move to the next string (E, C, G), repeating the pattern" },
+    {"name": "Spider Exercise", "type": 2, "reps": 5, "exercise": "Place your index finger on the 1st fret of the G string, middle finger on the 2nd fret, ring finger on the 3rd fret, and pinky on the 4th fret. \nPlay each note sequentially, then move your hand up one fret and repeat the process." }
+]
