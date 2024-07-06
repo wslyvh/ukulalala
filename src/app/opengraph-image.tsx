@@ -12,11 +12,11 @@ export const contentType = 'image/png'
 export default async function Image() {
   return new ImageResponse(
     (
-      <div tw='flex flex-col items-center justify-center bg-[#ece3ca] text-[#282425] w-full h-full gap-4 p-4'>
+      <div tw='flex flex-col items-center justify-center bg-[#ece3ca] text-[#282425] w-full h-full p-4'>
         <h1 style={{ fontSize: 128 }} tw='m-0 p-0'>
           {SITE_EMOJI}
         </h1>
-        <h2 style={{ fontSize: 64 }}>
+        <h2 style={{ fontSize: 64 }} tw='m-0 p-0'>
           {SITE_NAME}
         </h2>
         <div tw='flex my-12'>
