@@ -2,6 +2,7 @@ import ukulele from '@tombatossals/chords-db/src/db/ukulele/';
 import progressions from '@/data/progressions.json';
 import strumming from '@/data/strumming.json';
 import warmup from '@/data/warmup.json';
+import LikeButtons from '@/components/like';
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -140,7 +141,7 @@ export default async function Home() {
         </div>
 
         <div className='flex justify-center mt-8'>
-          <RefreshButton text='New Exercise' />
+          <LikeButtons />
         </div>
       </div>
   );
