@@ -1,5 +1,3 @@
-export const SITE_CONFIG = {
-    emoji: '🐨',
-    title: 'Ukulalala',
-    description: 'New exercises every time you pick up your ukulele',
+export const CONFIG = {
+    NODE_ENV: process.env.NODE_ENV || 'development',
 }
