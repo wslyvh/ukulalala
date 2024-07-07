@@ -57,14 +57,14 @@ export default function RootLayout(props: PropsWithChildren) {
       </head>
       <body>
         <main className="container mx-auto flex min-h-screen flex-col items-center justify-between p-4 sm:p-8">
-          <header className='flex flex-col text-center justify-center'>
+          <header className='flex flex-col text-center justify-center my-8'>
             <h1 className="text-4xl">{SITE_EMOJI} {SITE_NAME}</h1>
             <h2 className="text-sm mt-2">{SITE_DESCRIPTION}</h2>
           </header>
 
           <div className='my-4 sm:my-8'>{props.children}</div>
         
-          <footer className='flex flex-col items-center'>
+          <footer className='flex flex-col items-center my-8'>
             <Newsletter className="my-8" />
 
             <p className="text-xs">
