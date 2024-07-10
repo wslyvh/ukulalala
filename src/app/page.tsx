@@ -4,6 +4,7 @@ import strumming from '@/data/strumming.json';
 import warmup from '@/data/warmup.json';
 import LikeButtons from '@/components/like';
 import { MajorScales } from '@/components/scales';
+import { getRomanNumeral } from '@/utils/music';
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -135,7 +136,17 @@ export default async function Home() {
         </div>
 
         <h3 className='text-2xl text-center mb-2'>{progression.name}</h3>
-        <p className='text-xs text-center mb-8'>{progression.progression.join(' ')}</p>
+        <p className='text-center mb-2'>
+          <strong>{scale[0].key} Major scale </strong>
+        </p>
+        <div className='flex flex-row justify-center text-xs mb-8 gap-8'>
+          {progression.progression.map(i => {
+            return <span key={`progression_${i}`} className='text-center'>
+              {getRomanNumeral(i)}<br/>
+              ( {i} )
+            </span>
+          })}
+        </div>
 
         <div className='flex flex-wrap justify-center'>
           {progression.progression.map((i: any, index: number) => {
@@ -162,7 +173,7 @@ export default async function Home() {
         </div>
 
         <div className='flex justify-center mt-8'>
-          <LikeButtons />
+          <LikeButtons exercise={`${scale[0].key}.Major.${progression.progression.join('')}`} />
         </div>
       </div>
   );
