@@ -1,0 +1,11 @@
+[
+    {"name": "One-way", "pattern": ["G","C","E","A"]},
+    {"name": "In to Out", "pattern": ["C","E","G","A"]},
+    {"name": "Out to In", "pattern": ["G","A","C","E"]},
+    {"name": "Alternating", "pattern": ["C","G","E","A"]},
+    {"name": "Rolling", "pattern": ["C","E","A","G"]},
+    {"name": "Claw", "pattern": ["G","E","A","E"]},
+    {"name": "High", "pattern": ["CA","A","E","C"]},
+    {"name": "One Two", "pattern": ["G","CE","G","EA"]},
+    {"name": "Rolling Claw", "pattern": ["G","E","A","E","C","E","A","E"]}
+]

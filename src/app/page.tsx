@@ -1,6 +1,7 @@
 import ukulele from '@tombatossals/chords-db/src/db/ukulele/';
 import progressions from '@/data/progressions.json';
 import strumming from '@/data/strumming.json';
+import picking from '@/data/fingerpicking.json';
 import warmup from '@/data/warmup.json';
 import LikeButtons from '@/components/like';
 import { MajorScales } from '@/components/scales';
@@ -85,7 +86,8 @@ export default async function Home() {
   const scales = [cMajorScale, dMajorScale, fMajorScale, gMajorScale]
   const scale = scales[Math.floor(Math.random() * scales.length)]
 
-  const pattern = strumming[Math.floor(Math.random() * strumming.length)]
+  const strummingPattern = strumming[Math.floor(Math.random() * strumming.length)]
+  const pickingPattern = picking[Math.floor(Math.random() * picking.length)]
 
   const warmup1 = warmup.filter((i: any) => i.type === 1)[Math.floor(Math.random() * 2)]
   const warmup2 = warmup.filter((i: any) => i.type === 2)[Math.floor(Math.random() * 2)]
@@ -120,9 +122,9 @@ export default async function Home() {
           <div className="collapse-title text-xl font-medium m-0 pb-0">Scale Practice</div>
           <div className="collapse-content">
             <strong>{scale[0].key} Major scale</strong>
-            <p className='whitespace-pre-line leading-loose text-center text-sm md:text-base'>
+            <pre className='whitespace-pre-line leading-loose text-center text-sm md:text-base'>
               <MajorScales scale={scale[0].key} />
-            </p>
+            </pre>
 
             <hr className="h-px my-4 bg-base-300 border-0" />
 
@@ -136,30 +138,28 @@ export default async function Home() {
         </div>
 
         <h3 className='text-2xl text-center mb-2'>{progression.name}</h3>
-        <p className='text-center mb-2'>
+        <p className='text-center mb-8'>
           <strong>{scale[0].key} Major scale </strong>
         </p>
-        <div className='flex flex-row justify-center text-xs mb-8 gap-8'>
-          {progression.progression.map(i => {
-            return <span key={`progression_${i}`} className='text-center'>
-              {getRomanNumeral(i)}<br/>
-              ( {i} )
-            </span>
-          })}
-        </div>
 
         <div className='flex flex-wrap justify-center'>
           {progression.progression.map((i: any, index: number) => {
             const chord = scale[i - 1]
             return (
-              <div key={index}>
-                <uke-chord 
-                  key={index}
-                  frets={chord.positions[0].frets}
-                  fingers={chord.positions[0].fingers}
-                  name={`${chord.key} ${chord.suffix}`}
-                  length={5}
-                  size={1.5} />
+              <div key={index} className='text-center'>
+                <div>
+                  <uke-chord 
+                    key={index}
+                    frets={chord.positions[0].frets}
+                    fingers={chord.positions[0].fingers}
+                    name={`${chord.key} ${chord.suffix}`}
+                    length={5}
+                    size={1.5} />
+                </div>
+                <div className='text-sm'>
+                  {getRomanNumeral(i)}<br/>
+                  ( {i} )
+                </div>
               </div>
             )
           })}
@@ -168,7 +168,14 @@ export default async function Home() {
         <div>
           <h3 className='text-2xl text-center mt-8 mb-2'>Strumming Pattern</h3>
           <div className='text-center'>
-            <p>{pattern.pattern.join(' ')}</p>
+            <p>{strummingPattern.pattern.join(' ')}</p>
+          </div>
+        </div>
+
+        <div>
+          <h3 className='text-2xl text-center mt-8 mb-2'>Finger Picking</h3>
+          <div className='text-center'>
+            <p>{pickingPattern.pattern.join(' ')}</p>
           </div>
         </div>
 
