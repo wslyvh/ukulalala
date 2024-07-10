@@ -6,6 +6,7 @@ import warmup from '@/data/warmup.json';
 import LikeButtons from '@/components/like';
 import { MajorScales } from '@/components/scales';
 import { getRomanNumeral } from '@/utils/music';
+import Tab from '@/components/tab';
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
@@ -138,7 +139,7 @@ export default async function Home() {
         </div>
 
         <h3 className='text-2xl text-center mb-2'>{progression.name}</h3>
-        <p className='text-center mb-8'>
+        <p className='text-center'>
           <strong>{scale[0].key} Major scale </strong>
         </p>
 
@@ -146,7 +147,7 @@ export default async function Home() {
           {progression.progression.map((i: any, index: number) => {
             const chord = scale[i - 1]
             return (
-              <div key={index} className='text-center'>
+              <div key={index} className='text-center mt-8'>
                 <div>
                   <uke-chord 
                     key={index}
@@ -174,9 +175,7 @@ export default async function Home() {
 
         <div>
           <h3 className='text-2xl text-center mt-8 mb-2'>Finger Picking</h3>
-          <div className='text-center'>
-            <p>{pickingPattern.pattern.join(' ')}</p>
-          </div>
+          <Tab className='text-center' pattern={pickingPattern.pattern} />
         </div>
 
         <div className='flex justify-center mt-8'>
