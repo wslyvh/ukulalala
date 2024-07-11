@@ -153,7 +153,8 @@ export default async function Home() {
           <ul className="list-disc list-inside">
             <li>Begin by playing the scale slowly</li>
             <li>Use a metronome to gradually increase speed</li>
-            <li>Use appropriate finger positioning for each note</li>
+            <li>Use appropriate finger positioning for each note</li>            
+            <li>See more tips under Fingerpicking</li>
           </ul>
         </div>
       </div>
