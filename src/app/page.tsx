@@ -1,93 +1,21 @@
-import ukulele from "@tombatossals/chords-db/src/db/ukulele/";
 import progressions from "@/data/progressions.json";
 import strumming from "@/data/strumming.json";
 import picking from "@/data/fingerpicking.json";
 import warmup from "@/data/warmup.json";
 import LikeButtons from "@/components/like";
-import { MajorScales } from "@/components/scales";
+import { MajorScales as ScalesComponent } from "@/components/scales";
 import { getRomanNumeral } from "@/utils/music";
+import { MajorScales } from "@/data/keys";
 import Tab from "@/components/tab";
+import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export default async function Home() {
+  const scale = MajorScales[Math.floor(Math.random() * MajorScales.length)];
   const progression =
     progressions[Math.floor(Math.random() * progressions.length)];
-
-  // const aMajorScale = [
-  //   ukulele.chords.A.find((i: any) => i.suffix === 'major'),
-  //   ukulele.chords.B.find((i: any) => i.suffix === 'minor'),
-  //   ukulele.chords.C.find((i: any) => i.suffix === 'minor'),
-  //   ukulele.chords.D.find((i: any) => i.suffix === 'major'),
-  //   ukulele.chords.E.find((i: any) => i.suffix === 'major'),
-  //   ukulele.chords.F.find((i: any) => i.suffix === 'minor'),
-  //   ukulele.chords.G.find((i: any) => i.suffix === 'dim')
-  // ]
-
-  // const bMajorScale = [
-  //   ukulele.chords.B.find((i: any) => i.suffix === 'major'),
-  //   ukulele.chords.C.find((i: any) => i.suffix === 'minor'),
-  //   ukulele.chords.D.find((i: any) => i.suffix === 'minor'),
-  //   ukulele.chords.E.find((i: any) => i.suffix === 'major'),
-  //   ukulele.chords.F.find((i: any) => i.suffix === 'major'),
-  //   ukulele.chords.G.find((i: any) => i.suffix === 'minor'),
-  //   ukulele.chords.A.find((i: any) => i.suffix === 'dim')
-  // ]
-
-  const cMajorScale = [
-    ukulele.chords.C.find((i: any) => i.suffix === "major"),
-    ukulele.chords.D.find((i: any) => i.suffix === "minor"),
-    ukulele.chords.E.find((i: any) => i.suffix === "minor"),
-    ukulele.chords.F.find((i: any) => i.suffix === "major"),
-    ukulele.chords.G.find((i: any) => i.suffix === "major"),
-    ukulele.chords.A.find((i: any) => i.suffix === "minor"),
-    ukulele.chords.B.find((i: any) => i.suffix === "dim"),
-  ];
-
-  const dMajorScale = [
-    ukulele.chords.D.find((i: any) => i.suffix === "major"),
-    ukulele.chords.E.find((i: any) => i.suffix === "minor"),
-    ukulele.chords.F.find((i: any) => i.suffix === "minor"),
-    ukulele.chords.G.find((i: any) => i.suffix === "major"),
-    ukulele.chords.A.find((i: any) => i.suffix === "major"),
-    ukulele.chords.B.find((i: any) => i.suffix === "minor"),
-    ukulele.chords.C.find((i: any) => i.suffix === "dim"),
-  ];
-
-  // const eMajorScale = [
-  //   ukulele.chords.E.find((i: any) => i.suffix === 'major'),
-  //   ukulele.chords.F.find((i: any) => i.suffix === 'minor'),
-  //   ukulele.chords.G.find((i: any) => i.suffix === 'minor'),
-  //   ukulele.chords.A.find((i: any) => i.suffix === 'major'),
-  //   ukulele.chords.B.find((i: any) => i.suffix === 'major'),
-  //   ukulele.chords.C.find((i: any) => i.suffix === 'minor'),
-  //   ukulele.chords.D.find((i: any) => i.suffix === 'dim')
-  // ]
-
-  const fMajorScale = [
-    ukulele.chords.F.find((i: any) => i.suffix === "major"),
-    ukulele.chords.G.find((i: any) => i.suffix === "minor"),
-    ukulele.chords.A.find((i: any) => i.suffix === "minor"),
-    ukulele.chords.Bb.find((i: any) => i.suffix === "major"),
-    ukulele.chords.C.find((i: any) => i.suffix === "major"),
-    ukulele.chords.D.find((i: any) => i.suffix === "minor"),
-    ukulele.chords.E.find((i: any) => i.suffix === "dim"),
-  ];
-
-  const gMajorScale = [
-    ukulele.chords.G.find((i: any) => i.suffix === "major"),
-    ukulele.chords.A.find((i: any) => i.suffix === "minor"),
-    ukulele.chords.B.find((i: any) => i.suffix === "minor"),
-    ukulele.chords.C.find((i: any) => i.suffix === "major"),
-    ukulele.chords.D.find((i: any) => i.suffix === "major"),
-    ukulele.chords.E.find((i: any) => i.suffix === "minor"),
-    ukulele.chords.F.find((i: any) => i.suffix === "dim"),
-  ];
-
-  const scales = [cMajorScale, dMajorScale, fMajorScale, gMajorScale];
-  const scale = scales[Math.floor(Math.random() * scales.length)];
-
   const strummingPattern =
     strumming[Math.floor(Math.random() * strumming.length)];
   const pickingPattern = picking[Math.floor(Math.random() * picking.length)];
@@ -142,9 +70,9 @@ export default async function Home() {
           Scale Practice
         </div>
         <div className="collapse-content">
-          <strong>{scale[0].key} Major scale</strong>
+          <strong>{scale.key} Major scale</strong>
           <pre className="whitespace-pre-line leading-loose text-center text-sm md:text-base">
-            <MajorScales scale={scale[0].key} />
+            <ScalesComponent scale={scale.key as any} />
           </pre>
 
           <hr className="h-px my-4 bg-base-300 border-0" />
@@ -153,20 +81,25 @@ export default async function Home() {
           <ul className="list-disc list-inside">
             <li>Begin by playing the scale slowly</li>
             <li>Use a metronome to gradually increase speed</li>
-            <li>Use appropriate finger positioning for each note</li>            
+            <li>Use appropriate finger positioning for each note</li>
             <li>See more tips under Fingerpicking</li>
           </ul>
         </div>
       </div>
 
-      <h3 className="text-2xl text-center mb-2">{progression.name}</h3>
+      <div className="flex flex-row justify-center items-center gap-2">
+        <h3 className="text-2xl text-center">{progression.name}</h3>
+        <Link href="/progressions">
+          <button className="btn btn-link">more</button>
+        </Link>
+      </div>
       <p className="text-center">
-        <strong>{scale[0].key} Major scale </strong>
+        <strong>{scale.key} Major scale </strong>
       </p>
 
       <div className="flex flex-wrap justify-center mb-8">
         {progression.progression.map((i: any, index: number) => {
-          const chord = scale[i - 1];
+          const chord = scale.scale[i - 1];
           return (
             <div key={index} className="text-center mt-8">
               <div>
@@ -214,14 +147,15 @@ export default async function Home() {
                 <strong>Upstroke (U)</strong>: Strum from bottom to top, hitting
                 the A string first
                 <br />
-                <strong>Muted (X)</strong>: Strum with your palm muting (chuck) the
-                strings by lightly touching the strings without pressing down
+                <strong>Muted (X)</strong>: Strum with your palm muting (chuck)
+                the strings by lightly touching the strings without pressing
+                down
                 <br />
               </p>
             </li>
             <li>
-              Start slowly by playing the strumming pattern with open
-              strings, no chords, building muscle memory
+              Start slowly by playing the strumming pattern with open strings,
+              no chords, building muscle memory
             </li>
             <li>
               Play the strumming pattern once for each chord in the chord
@@ -232,8 +166,8 @@ export default async function Home() {
               softer), adding expression to your playing
             </li>
             <li>
-              Apply strumming patterns to songs to see how they fit and
-              play along your favorite songs
+              Apply strumming patterns to songs to see how they fit and play
+              along your favorite songs
             </li>
           </ul>
 
@@ -312,7 +246,7 @@ export default async function Home() {
 
       <div className="flex justify-center mt-8">
         <LikeButtons
-          exercise={`${scale[0].key}.Major.${progression.progression.join("")}`}
+          exercise={`${scale.key}.Major.${progression.progression.join("")}`}
         />
       </div>
     </div>
