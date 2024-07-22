@@ -5,7 +5,7 @@ interface Props {
   className?: string
 }
 
-export default function RefreshButton(props: Props) {
+export function RefreshButton(props: Props) {
   let className = 'btn btn-primary btn-wide btn-sm'
   if (props.className) className += ` ${props.className}`
 

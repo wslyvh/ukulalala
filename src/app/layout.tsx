@@ -1,10 +1,10 @@
 import { PropsWithChildren } from "react";
 import { Metadata, Viewport } from "next";
 import { SITE_DESCRIPTION, SITE_DOMAIN, SITE_EMOJI, SITE_NAME, SITE_URL, SOCIAL_TWITTER } from "@/utils/site";
-import { Newsletter } from "@/components/newsletter";
 import PlausibleProvider from 'next-plausible'
 import Script from "next/script";
 import Link from "next/link";
+import { Footer } from "@/components/footer";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -66,13 +66,7 @@ export default function RootLayout(props: PropsWithChildren) {
 
           <div className='my-4 sm:my-8'>{props.children}</div>
         
-          <footer className='flex flex-col items-center my-8'>
-            <Newsletter className="my-8" />
-
-            <p className="text-xs">
-              Made with <span role="img" aria-label="heart">❤️</span> by <Link href={`https://x.com/${SOCIAL_TWITTER}`}>{SOCIAL_TWITTER}</Link>
-            </p>
-          </footer>
+          <Footer className="my-8" />
         </main>
       </body>
       <Script src="//pianosnake.github.io/uke-chord/uke-chord.js" />

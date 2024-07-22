@@ -14,7 +14,7 @@ interface Props {
 }
 
 export function Progression(props: Props) {
-  const router = useRouter()
+  const router = useRouter();
   const [scale, setScale] = useState(props.scale);
   const [progression, setProgression] = useState(props.progression);
 
@@ -23,19 +23,26 @@ export function Progression(props: Props) {
       MajorScales.find((i: any) => i.key === key) ||
       MajorScales[Math.floor(Math.random() * MajorScales.length)];
     setScale(scale);
-    router.push(`/progressions/${scale.key}/${progression.progression.join("-")}`);
+    router.push(
+      `/progressions/${scale.key}/${progression.progression.join("-")}`
+    );
   }
 
-  function randomScale() { 
+  function randomScale() {
     const scale = MajorScales[Math.floor(Math.random() * MajorScales.length)];
     setScale(scale);
-    router.push(`/progressions/${scale.key}/${progression.progression.join("-")}`);
+    router.push(
+      `/progressions/${scale.key}/${progression.progression.join("-")}`
+    );
   }
 
   function randomProgression() {
-    const progression = progressions[Math.floor(Math.random() * progressions.length)];
+    const progression =
+      progressions[Math.floor(Math.random() * progressions.length)];
     setProgression(progression);
-    router.push(`/progressions/${scale.key}/${progression.progression.join("-")}`);
+    router.push(
+      `/progressions/${scale.key}/${progression.progression.join("-")}`
+    );
   }
 
   return (
@@ -86,7 +93,7 @@ export function Progression(props: Props) {
 
       <div className="flex flex-col items-center gap-4 mb-4">
         <div className="flex items-center gap-2">
-          <h4 className="text-xl text-center">Key</h4>          
+          <h4 className="text-xl text-center">Key</h4>
           <button className="btn btn-link" onClick={randomScale}>
             random
           </button>
