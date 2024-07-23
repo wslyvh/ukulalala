@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: ProgressionParams) {
   const progression = getProgression(params.progression);
 
   const baseUri = new URL(`${SITE_URL}`);
-  const pageUri = `${baseUri}/progressions/${
+  const pageUri = `${baseUri}progressions/${
     scale.key
   }/${progression.progression.join("-")}`;
   const title = `${progression.name} in ${scale.key}`;
@@ -34,12 +34,12 @@ export async function generateMetadata({ params }: ProgressionParams) {
     openGraph: {
       title: title,
       description: description,
-      images: `${pageUri}opengraph-image`,
+      images: `${pageUri}/opengraph-image`,
     },
     twitter: {
       title: title,
       description: description,
-      images: `${pageUri}opengraph-image`,
+      images: `${pageUri}/opengraph-image`,
       card: "summary",
     },
   };
