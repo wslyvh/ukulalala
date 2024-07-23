@@ -24,7 +24,7 @@ export default async function Home({ params }: Params) {
           slugify(params.progression, { strict: true, lower: true }) ||
         i.progression.join("") === params.progression ||
         i.progression.join("-") === params.progression
-    ) || progressions[Math.floor(Math.random() * progressions.length)];
+    ) || { name: "Chord Progression", progression: params.progression.split("-").map(Number) };
 
   return <Progression scale={scale} progression={progression} />;
 }
