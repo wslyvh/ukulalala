@@ -34,12 +34,12 @@ export async function generateMetadata({ params }: ProgressionParams) {
     openGraph: {
       title: title,
       description: description,
-      images: `${pageUri}/opengraph-image`,
+      images: `${pageUri}opengraph-image`,
     },
     twitter: {
       title: title,
       description: description,
-      images: `${pageUri}/opengraph-image`,
+      images: `${pageUri}opengraph-image`,
       card: "summary",
     },
   };
