@@ -48,6 +48,7 @@ export function Progression(props: Props) {
   return (
     <div>
       <h3 className="text-2xl text-center mb-2">{progression.name}</h3>
+      <h4 className='text-center'>in {scale.key} {scale.suffix} scale</h4>
       <div className="flex flex-wrap justify-center mb-8 gap-2">
         {progression.progression.map((i: any, index: number) => {
           const chord = scale.scale[i - 1];
@@ -75,7 +76,7 @@ export function Progression(props: Props) {
 
       <div className="flex flex-col items-center gap-4 mb-4">
         <div className="flex items-center gap-2">
-          <h4 className="text-xl text-center">Progression</h4>
+          <h5 className="text-xl text-center">Progression</h5>
           <button className="btn btn-link" onClick={randomProgression}>
             random
           </button>
@@ -93,7 +94,7 @@ export function Progression(props: Props) {
 
       <div className="flex flex-col items-center gap-4 mb-4">
         <div className="flex items-center gap-2">
-          <h4 className="text-xl text-center">Key</h4>
+          <h5 className="text-xl text-center">Key</h5>
           <button className="btn btn-link" onClick={randomScale}>
             random
           </button>

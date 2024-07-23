@@ -1,30 +1,53 @@
 import { Progression } from "@/components/progression";
-import { MajorScales } from "@/data/keys";
-import progressions from "@/data/progressions.json";
-import slugify from "slugify";
+import { getProgression, getScale } from "@/utils/music";
+import { SITE_URL } from "@/utils/site";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-interface Params {
+export interface ProgressionParams {
   params: {
     key: string;
     progression: string;
   };
 }
 
-export default async function Home({ params }: Params) {
-  const scale =
-    MajorScales.find((i) => i.key.toLowerCase() === params.key.toLowerCase()) ||
-    MajorScales[Math.floor(Math.random() * MajorScales.length)];
-  const progression =
-    progressions.find(
-      (i) =>
-        slugify(i.name, { strict: true, lower: true }) ===
-          slugify(params.progression, { strict: true, lower: true }) ||
-        i.progression.join("") === params.progression ||
-        i.progression.join("-") === params.progression
-    ) || { name: "Chord Progression", progression: params.progression.split("-").map(Number) };
+export async function generateMetadata({ params }: ProgressionParams) {
+  const scale = getScale(params.key);
+  const progression = getProgression(params.progression);
+
+  const baseUri = new URL(`${SITE_URL}`);
+  const pageUri = `${baseUri}/progressions/${
+    scale.key
+  }/${progression.progression.join("-")}`;
+  const title = `${progression.name} in ${scale.key}`;
+  const description = `Check out this ${
+    progression.name
+  } chord progression (${progression.progression.join("-")}) in the key of ${
+    scale.key
+  }.`;
+
+  return {
+    title: title,
+    description: description,
+    metadataBase: new URL(baseUri),
+    openGraph: {
+      title: title,
+      description: description,
+      images: `${pageUri}/opengraph-image`,
+    },
+    twitter: {
+      title: title,
+      description: description,
+      images: `${pageUri}/opengraph-image`,
+      card: "summary",
+    },
+  };
+}
+
+export default async function Home({ params }: ProgressionParams) {
+  const scale = getScale(params.key);
+  const progression = getProgression(params.progression);
 
   return <Progression scale={scale} progression={progression} />;
 }
