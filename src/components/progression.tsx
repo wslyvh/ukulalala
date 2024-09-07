@@ -47,8 +47,8 @@ export function Progression(props: Props) {
 
   return (
     <div>
-      <h3 className="text-2xl text-center mb-2">{progression.name}</h3>
-      <h4 className='text-center'>in {scale.key} {scale.suffix} scale</h4>
+      <h2 className="text-2xl text-center mb-2">{progression.name}</h2>
+      <h3 className='text-center'>in {scale.key} {scale.suffix} scale</h3>
       <div className="flex flex-wrap justify-center mb-8 gap-2">
         {progression.progression.map((i: any, index: number) => {
           const chord = scale.scale[i - 1];
