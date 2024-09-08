@@ -174,17 +174,12 @@ export function Metronome() {
           className="flex items-center justify-center btn btn-accent size-32 text-2xl text-white rounded-full transition-all duration-300 transform hover:scale-105"
           onClick={togglePlay}
         >
-          <div
-            className="absolute inline-flex size-20 rounded-full bg-accent"
-            style={{
-              animation: isPlaying 
-                ? `ping ${Number((60 / bpm).toFixed(1))}s cubic-bezier(0, 0, 0, 1) infinite`
-                : "none",
-              opacity: isPlaying ? 0.8 : 0,
-            }}
-          ></div>
           {isPlaying ? (
             <>
+              <div className={`absolute inline-flex size-20 rounded-full bg-accent opacity-75`}
+                style={{
+                  animation: `ping ${Number((60 / bpm).toFixed(1))}s cubic-bezier(0, 0, 0.2, 1) infinite`
+                }}></div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
