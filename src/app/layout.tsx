@@ -6,6 +6,7 @@ import Script from "next/script";
 import Link from "next/link";
 import { Footer } from "@/components/footer";
 import "./globals.css";
+import { Navbar } from "@/components/navbar";
 
 export const metadata: Metadata = {
   applicationName: SITE_NAME,
@@ -63,6 +64,8 @@ export default function RootLayout(props: PropsWithChildren) {
             </Link>
             <h2 className="text-sm mt-2">{SITE_DESCRIPTION}</h2>            
           </header>
+
+          <Navbar />
 
           <div className='my-4 sm:my-8'>{props.children}</div>
         
