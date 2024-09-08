@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
 export function Metronome() {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [bpm, setBpm] = useState(80);
+  const [bpm, setBpm] = useState(90);
   const [volume, setVolume] = useState(0.5);
   const [time, setTime] = useState(0);
   const [timeSignature, setTimeSignature] = useState(4);
@@ -48,9 +48,24 @@ export function Metronome() {
       .join(":");
   };
 
-  const togglePlay = () => {
-    setIsPlaying(!isPlaying);
-  };
+  const togglePlay = useCallback(() => {
+    setIsPlaying((prevIsPlaying) => !prevIsPlaying);
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.code === 'Space' && event.target === document.body) {
+        event.preventDefault();
+        togglePlay();
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [togglePlay]);
 
   const stopTimer = () => {
     beatCountRef.current = 1
@@ -107,6 +122,7 @@ export function Metronome() {
           onChange={(e) => setTimeSignature(Number(e.target.value))}
           className="select select-bordered select-xs w-full"
         >
+          <option value={2}>2/4</option>
           <option value={3}>3/4</option>
           <option value={4}>4/4</option>
         </select>
@@ -158,21 +174,32 @@ export function Metronome() {
           className="flex items-center justify-center btn btn-accent size-32 text-2xl text-white rounded-full transition-all duration-300 transform hover:scale-105"
           onClick={togglePlay}
         >
+          <div
+            className="absolute inline-flex size-20 rounded-full bg-accent"
+            style={{
+              animation: isPlaying 
+                ? `ping ${Number((60 / bpm).toFixed(1))}s cubic-bezier(0, 0, 0, 1) infinite`
+                : "none",
+              opacity: isPlaying ? 0.8 : 0,
+            }}
+          ></div>
           {isPlaying ? (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="size-12"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15.75 5.25v13.5m-7.5-13.5v13.5"
-              />
-            </svg>
+            <>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="size-12 z-10"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15.75 5.25v13.5m-7.5-13.5v13.5"
+                />
+              </svg>
+            </>
           ) : (
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -180,7 +207,7 @@ export function Metronome() {
               viewBox="0 0 24 24"
               stroke-width="1.5"
               stroke="currentColor"
-              className="size-12"
+              className="size-12 z-10"
             >
               <path
                 stroke-linecap="round"
@@ -192,7 +219,11 @@ export function Metronome() {
         </button>
       </div>
 
-      <div className="my-8">
+      <div className="text-center text-sm tabular-nums my-4">
+        {formatTime(time)}
+      </div>
+
+      <div>
         <button className="btn btn-neutral btn-sm w-full" onClick={stopTimer}>
           Reset
         </button>
