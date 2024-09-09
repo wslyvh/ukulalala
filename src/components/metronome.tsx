@@ -176,7 +176,7 @@ export function Metronome() {
         >
           {isPlaying ? (
             <>
-              <div className='absolute animate-ping inline-flex size-20 rounded-full bg-accent opacity-80'
+              <div className='absolute animate-ping inline-flex size-24 rounded-full bg-accent opacity-80'
                 style={{
                   animation: `ping ${Number((60 / bpm).toFixed(1))}s cubic-bezier(0, 0, 0.2, 1) infinite`
                 }}></div>
