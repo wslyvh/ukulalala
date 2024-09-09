@@ -20,7 +20,7 @@ export async function generateMetadata() {
       title: title,
       description: description,
       images: `${pageUri}/opengraph-image`,
-      card: "summary",
+      card: "summary_large_image",
     },
   };
 }

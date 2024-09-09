@@ -40,7 +40,7 @@ export async function generateMetadata({ params }: ProgressionParams) {
       title: title,
       description: description,
       images: `${pageUri}/opengraph-image`,
-      card: "summary",
+      card: "summary_large_image",
     },
   };
 }
