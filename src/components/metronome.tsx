@@ -11,10 +11,34 @@ export function Metronome() {
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const audioContext = useRef<AudioContext | null>(null);
   const beatCountRef = useRef(1);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const audioBuffers = useRef<{ [key: string]: AudioBuffer }>({});
 
   useEffect(() => {
     audioContext.current = new (window.AudioContext ||
       (window as any).webkitAudioContext)();
+
+    // Load audio samples
+    const sampleUrls = {
+      hi: "/sounds/hi.wav",
+      lo: "/sounds/lo.wav",
+    };
+
+    const loadSample = async (name: string, url: string) => {
+      const response = await fetch(url);
+      const arrayBuffer = await response.arrayBuffer();
+      const audioBuffer = await audioContext.current!.decodeAudioData(
+        arrayBuffer
+      );
+      audioBuffers.current[name] = audioBuffer;
+    };
+
+    Promise.all(
+      Object.entries(sampleUrls).map(([name, url]) => loadSample(name, url))
+    )
+      .then(() => setIsLoaded(true))
+      .catch((error) => console.error("Error loading audio samples:", error));
+
     return () => {
       if (audioContext.current) {
         audioContext.current.close();
@@ -54,40 +78,39 @@ export function Metronome() {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.code === 'Space' && event.target === document.body) {
+      if (event.code === "Space" && event.target === document.body) {
         event.preventDefault();
         togglePlay();
       }
     };
 
-    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener("keydown", handleKeyDown);
     };
   }, [togglePlay]);
 
   const stopTimer = () => {
-    beatCountRef.current = 1
+    beatCountRef.current = 1;
     setIsPlaying(false);
     setTime(0);
   };
 
   const playClick = () => {
-    if (!audioContext.current) return;
-    const oscillator = audioContext.current.createOscillator();
+    if (!audioContext.current || !isLoaded) return;
+
+    const source = audioContext.current.createBufferSource();
     const gainNode = audioContext.current.createGain();
 
-    oscillator.connect(gainNode);
+    source.buffer =
+      audioBuffers.current[beatCountRef.current === 1 ? "hi" : "lo"];
+    source.connect(gainNode);
     gainNode.connect(audioContext.current.destination);
 
-    const frequency = beatCountRef.current === 1 ? 1000 : 800;
-    oscillator.frequency.setValueAtTime(frequency, audioContext.current.currentTime);
     gainNode.gain.setValueAtTime(volume, audioContext.current.currentTime);
 
-    oscillator.start();
-    oscillator.stop(audioContext.current.currentTime + 0.1);
-
+    source.start();
     beatCountRef.current = (beatCountRef.current % timeSignature) + 1;
   };
 
@@ -176,10 +199,14 @@ export function Metronome() {
         >
           {isPlaying ? (
             <>
-              <div className='absolute animate-ping inline-flex size-24 rounded-full bg-accent opacity-80'
+              <div
+                className="absolute animate-ping inline-flex size-24 rounded-full bg-accent opacity-80"
                 style={{
-                  animation: `ping ${Number((60 / bpm).toFixed(1))}s cubic-bezier(0, 0, 0.2, 1) infinite`
-                }}></div>
+                  animation: `ping ${Number(
+                    (60 / bpm).toFixed(1)
+                  )}s cubic-bezier(0, 0, 0.2, 1) infinite`,
+                }}
+              ></div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
